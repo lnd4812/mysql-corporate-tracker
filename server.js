@@ -3,7 +3,7 @@
 // const apiRoutes = require('./routes/apiRoutes');
 const cTable = require('console.table');
 console.table([
-    {employees, departments, roles}
+    {employee, department, role}
 ]);
 
 

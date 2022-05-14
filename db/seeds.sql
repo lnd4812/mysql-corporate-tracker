@@ -1,33 +1,35 @@
-INSERT INTO departments (name)
+INSERT INTO department (name)
 VALUES
     ('Accounting'),
     ('Administration'),
     ('Corporate'),
     ('Customer Service'),
     ('Human Resources'),
-    ('IT'),
-    ('Marketing'),
-    ('Sales');  
-
-INSERT INTO roles (title, salary, department_id)  
+    ('Marketing');
+    
+INSERT INTO role (title, salary, department_id)  
 VALUES
-    ('President', 250000, 3),
-    ('Manager', 100000, 4),
-    ('Manager', 100000, 6),
-    ('Manager', 100000, 7),
-    ('Manager', 100000, 8),
-    ('Account Manager', 75000, 7),
-    ('Customer Service Rep', 40000, 4),
-    ('Sales Rep', 50000, 8),
-    ('Data Analyst', 60000, 6);
+    ('President', 250000.00, 3),
+    ('Controller', 200000.00, 3),
+    ('Head of HR', 150000.00, 5),
+    ('VP, Sales', 125000.00, 6),
+    ('Accountant', 100000.00, 1),
+    ('Account Manager', 75000.00, 6),
+    ('Sales Rep', 60000.00, 6),
+    ('Personal Assistant', 50000.00, 2),
+    ('Customer Service Rep', 40000.00,5);
    
-INSERT INTO employees (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
     ('John', 'Doe', 1, NULL),
     ('Mary', 'Smith', 2, 1),
-    ('Jane', 'Johnson', 6, 4),
-    ('Robert', 'Mason', 8, 5),
-    ('Jill', 'Simpson', 3, 1);
+    ('Jane', 'Johnson', 3, 1),
+    ('Robert', 'Mason', 4, 1),
+    ('Jill', 'Simpson', 5, 2),
+    ('Bill', 'Jones', 6, 4),
+    ('Anne', 'Andrews', 7, 4),
+    ('Ellen', 'White', 8, 1),
+    ('Joe', 'Parker', 9, 4);
     
     
   
