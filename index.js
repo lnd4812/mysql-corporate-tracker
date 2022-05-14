@@ -21,14 +21,8 @@ const promptTracker = () => {
         switch(option) {
         
             case 'view all departments':
-                return inquirer
-                    .prompt([
-                        {
-                    
-                        },   
-                    ])
-                .then(responses => {
-                });  
+                
+                const departments = []
 
             case 'view all roles':
                 return inquirer
