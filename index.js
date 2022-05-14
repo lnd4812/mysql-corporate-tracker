@@ -1,7 +1,11 @@
 const inquirer = require("inquirer");
+const cTable = require('console.table');
+const mysql = require('mysql2');
+const db = require('./db');
 
 
 const promptTracker = () => {
+    console.table
 
     return (
       inquirer
@@ -129,11 +133,11 @@ const promptTracker = () => {
                         },     
                     ])
                     . then(responses => {
-                        // PUT TABLE role; 
+                        // UPDATE TABLE role; 
                     })
         }
         })
     )
 }
-
 promptTracker();
+module.exports = promptTracker(answers);

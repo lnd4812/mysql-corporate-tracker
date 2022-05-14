@@ -1,12 +1,12 @@
-DROP DATABASE iF EXISTS employee;
-DROP DATABASE iF EXISTS role;
-DROP DATABASE iF EXISTS department;
+DROP DATABASE iF EXISTS employees;
+DROP DATABASE iF EXISTS roles;
+DROP DATABASE iF EXISTS departments;
 
-CREATE DATABASE department;
-USE department;
+CREATE DATABASE departments;
+USE departments;
 
-CREATE DATABASE role;
-USE role;
+CREATE DATABASE roles;
+USE roles;
 
-CREATE DATABASE employee;
-USE employee;
+CREATE DATABASE employees;
+USE employees;
