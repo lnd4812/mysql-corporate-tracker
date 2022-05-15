@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const cTable = require('console.table');
 const mysql = require('mysql2');
+const placholder = require('./query.js');
 // const db = require('./db');
 
 
@@ -115,8 +116,7 @@ const promptTracker = () => {
                         },     
                     ])
                     . then(answers => {
-                        return `UPDATE employee
-                        SET role_id = ${answers} WHERE id = ?`; 
+                         
                     });
 
             case 'update employee manager':        
@@ -134,8 +134,7 @@ const promptTracker = () => {
                         },     
                     ])
                     . then(answers => {
-                        return `UPDATE employee
-                        SET manager_id = ${answers} WHERE id = ?`; 
+                       
                     });
                    
             case 'view employees by manager':        
@@ -148,8 +147,7 @@ const promptTracker = () => {
                         },
                     ])
                     . then(answers => {
-                        return `SELECT * FROM employee
-                        WHERE manager_id = ${answers}`; 
+                        
                     });
                     
             case 'view employees by department':        
@@ -162,8 +160,7 @@ const promptTracker = () => {
                         },
                     ])
                     . then(answers => {
-                        return `SELECT * FROM employee
-                        WHERE department_id = ${answers}`; 
+                       
                     });
             
             case 'delete department':        
@@ -176,8 +173,7 @@ const promptTracker = () => {
                         },
                     ])
                     . then(answers => {
-                        return `DELETE * FROM department
-                        WHERE department_id = ${answers}`;
+                        
                         // include actions for roles/ee's attached to that department
                         // use similar format to delete role, employee 
                     });
@@ -192,7 +188,7 @@ const promptTracker = () => {
                         },
                     ])
                     . then(answers => {
-                        return `? add salaries ...SELECT * FROM TABLE role WHERE department_id = ${answers}`;
+                        
                         // include actions for roles/ee's attached to that department
                         // use similar format to delete role, employee 
                     });

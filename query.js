@@ -1,6 +1,6 @@
 // need function that will take input from index.js file and then functions required to:
 
-const db = require("./db/connection");
+module.exports(indexResponses);  // where indexResponses is placeholder until I figure out what to use
 const cTable = require("console.table");
 
 function tableAction(indexResponses) {
@@ -79,14 +79,12 @@ function tableAction(indexResponses) {
             }   console.table(result);
         });  // does this have to work around FK Constraints?
     }   else if (indexResponses === "view budget") {
-        db.query(`SELECT * FROM `)
-        // for (var i = 0; i < arrayCreatedFromRole.length, i++) {
-            // let salaryTotal = ''; 
-            //employee.salary += salaryTotal;
-            // return salaryTotal
-              // add employee.salary from SELECT * FROM employees WHERE employee.department_id = ?  
-    }   
+        db.query(`SELECT SUM(salary) FROM employee WHERE id = ${indexResponses}`, (err, result) => {
+            if (err) {
+                console.log(err);
+            }   console.table(result);
+        });
+    };   
 
 tableAction();
 
-module.exports(indexResponses);  // where indexResponses is placeholder until I figure out what to use
