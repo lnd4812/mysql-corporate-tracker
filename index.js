@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const cTable = require('console.table');
 const mysql = require('mysql2');
-const db = require('./db');
+// const db = require('./db');
 
 
 const promptTracker = () => {
@@ -14,7 +14,7 @@ const promptTracker = () => {
             type: "checkbox",
             name: "options",
             message: "Please choose one of the following options",
-            choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee", "update employee role"],
+            choices: ["view all departments", "view all roles", "view all employees", "add a department", "add a role", "add an employee", "update employee role", "update employee manager", "view employees by manager", "view employees by department", "delete department", "delete role", "delete employee", "view budget"],
           }
         ])
         .then(responses => {
@@ -26,28 +26,15 @@ const promptTracker = () => {
         
             case 'view all departments':
                 
-                const departments = []
+                return answers;
 
             case 'view all roles':
-                return inquirer
-                    .prompt ([
-                    {
-
-
-                    }
-                    ])
-                .then(responses => {
-                });
+                
+                return answers;
             
             case 'view all employees':
-                return inquirer
-                    .prompt ([
-                        {
-
-                        }
-                    ])
-                .then(responses => {    
-                });
+              
+                return answers;
 
             case 'add department':
                 return inquirer
@@ -58,8 +45,8 @@ const promptTracker = () => {
                             message: "Please enter name of department",
                         },
                     ])
-                    .then(responses => {
-                        //INSERT into TABLE department;
+                    .then(answers => {
+                       
                     });
                 
             case 'add a role':
@@ -67,22 +54,22 @@ const promptTracker = () => {
                 .prompt([
                     {
                         type: 'input',
-                        name: 'employee',
-                        message: "Please enter name of employee being assigned the role",
+                        name: 'title',
+                        message: "Please enter title",
                     },
                     {
                         type: 'input',
                         name: 'salary',
-                        message: "Please enter the employee's salary",
+                        message: "Please enter salary for the role",
                     },
                     {
                         type: 'input',
-                        name: 'department',
-                        message: "Please enter employee's department",
+                        name: 'department_id',
+                        message: "Please add department",
                     }
                 ])
-                .then(responses => {
-                    //'INSERT into TABLE role';
+                .then(answers => {
+                    
                 });
             
             case 'add employee':
@@ -100,22 +87,17 @@ const promptTracker = () => {
                         },
                         {
                             type: 'input',
-                            name: 'salary',
-                            message: "Please enter the employee's salary",
+                            name: 'role_id',
+                            message: "Please enter employee's title",
                         },
                         {
                             type: 'input',
-                            name: 'role',
-                            message: "Please enter employee's role",
-                        },
-                        {
-                            type: 'input',
-                            name: 'manager',
+                            name: 'manager_id',
                             message: "Please enter employee's manager",
                         }
                     ])
-                    .then(responses => {
-                        // INSERT into TABLE employee;
+                    .then(answers => {
+                        
                     }); 
 
             case 'update employee role':        
@@ -123,21 +105,102 @@ const promptTracker = () => {
                     .prompt([
                         {
                             type: 'input',
-                            name: 'employee',
+                            name: 'employee_id',
                             message: "Please select employee being updated",
                         },
                         {
                             type: 'input',
-                            name: 'role',
+                            name: 'role_id',
                             message: "Please select employee's new role",
                         },     
                     ])
-                    . then(responses => {
-                        // UPDATE TABLE role; 
-                    })
-        }
+                    . then(answers => {
+                        return `UPDATE employee
+                        SET role_id = ${answers} WHERE id = ?`; 
+                    });
+
+            case 'update employee manager':        
+                return inquirer
+                    .prompt([
+                        {
+                            type: 'input',
+                            name: 'employee_id',
+                            message: "Please select employee whose manager is changing",
+                        },
+                        {
+                            type: 'input',
+                            name: 'manager_id',
+                            message: "Please select employee's new manager",
+                        },     
+                    ])
+                    . then(answers => {
+                        return `UPDATE employee
+                        SET manager_id = ${answers} WHERE id = ?`; 
+                    });
+                   
+            case 'view employees by manager':        
+                return inquirer
+                    .prompt([
+                        {
+                            type: 'input',
+                            name: 'manager_id',
+                            message: "Please select manager by id",
+                        },
+                    ])
+                    . then(answers => {
+                        return `SELECT * FROM employee
+                        WHERE manager_id = ${answers}`; 
+                    });
+                    
+            case 'view employees by department':        
+                return inquirer
+                    .prompt([
+                        {
+                            type: 'input',
+                            name: 'department_id',
+                            message: "Please select department",
+                        },
+                    ])
+                    . then(answers => {
+                        return `SELECT * FROM employee
+                        WHERE department_id = ${answers}`; 
+                    });
+            
+            case 'delete department':        
+                return inquirer
+                    .prompt([
+                        {
+                            type: 'input',
+                            name: 'department_id',
+                            message: "Which department do you want to delete?",
+                        },
+                    ])
+                    . then(answers => {
+                        return `DELETE * FROM department
+                        WHERE department_id = ${answers}`;
+                        // include actions for roles/ee's attached to that department
+                        // use similar format to delete role, employee 
+                    });
+            
+            case "view total utilized budget for department":
+                return inquirer
+                    .prompt([
+                        {
+                            type: 'input',
+                            name: 'department_id',
+                            message: "Which department's salary do you want to view?",
+                        },
+                    ])
+                    . then(answers => {
+                        return `? add salaries ...SELECT * FROM TABLE role WHERE department_id = ${answers}`;
+                        // include actions for roles/ee's attached to that department
+                        // use similar format to delete role, employee 
+                    });
+                    
+            };
         })
-    )
+    );
 }
 promptTracker();
-module.exports = promptTracker(answers);
+
+  // where answers is placeholder until I figure out what to use

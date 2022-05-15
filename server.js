@@ -1,10 +1,10 @@
 // const express = require('express');
 // const db = require('./db/connection');
 // const apiRoutes = require('./routes/apiRoutes');
-const cTable = require('console.table');
-console.table([
-    {employee, department, role}
-]);
+// const cTable = require('console.table');
+// console.table([
+//     {employee, department, role}
+// ]);
 
 
 
