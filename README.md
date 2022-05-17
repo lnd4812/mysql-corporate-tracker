@@ -52,11 +52,11 @@ If you have any questions, please see my contact details below:
 
 ## GitHub Username
 
-My GitHub Username is lnd4812 [username](https://github.com/lnd4812).
+My GitHub Username is [lnd4812](https://github.com/lnd4812).
 
 ## GitHub Repository
 
-My GitHub repository link for this project is [github address](https://github.com/lnd4812/mysql-corporate-tracker)
+My GitHub repository link for this project is [github.com/lnd4812/mysql-corporate-tracker](https://github.com/lnd4812/mysql-corporate-tracker)
 
 ## Application Video Link
 
