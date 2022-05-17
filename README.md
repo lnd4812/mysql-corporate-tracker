@@ -60,7 +60,7 @@ My GitHub repository link for this project is [github address](https://github.co
 
 ## Application Video Link
 
-The link to the application video may be accessed at to follow
+The link to the application video may be accessed here [video link](https://www.vidline.com/share/V00BDH1K5K/f0e7b0be4fd02edee343f8a49d343d2e)
 
 ## Contact information
 

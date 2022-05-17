@@ -10,3 +10,5 @@ const db = mysql.createConnection({
 });
 
 module.exports = db;
+
+// not entirely sure this is needed unless connecting to the internet but for future implementation, have left it in
