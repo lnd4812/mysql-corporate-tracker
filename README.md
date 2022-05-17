@@ -52,7 +52,7 @@ If you have any questions, please see my contact details below:
 
 ## GitHub Username
 
-My GitHub Username is [username](https://github.com/lnd4812).
+My GitHub Username is lnd4812 [username](https://github.com/lnd4812).
 
 ## GitHub Repository
 
