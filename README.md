@@ -36,7 +36,7 @@ This application is covered under the MIT license.  [MIT license link](https://c
 
 ## Contributing
 
-There is still work to be done, as I need to finish the coding to actually pass the responses from the prompts into the commands for the mysql actions. I also need to to fix whatever error is ending inquirer before allowing a user to enter any information.  Any feedback or assistance is always welcome.
+There is still work to be done, as I need to finish the coding to actually pass the responses from the prompts into the commands for the mysql actions. I also need to to fix whatever error is ending inquirer before allowing a user to enter any information.   Any feedback or assistance is always welcome.
 
 ## Testing
 

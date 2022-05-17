@@ -5,6 +5,22 @@ const mysql = require("mysql2");
 const db = require("./db/connection");
 
 function promptTracker() {
+// show full table
+  db.query(
+    `SELECT employee.first_name, employee.last_name, role.title, department.name AS department_name, role.salary, employee.manager_id AS manager_name
+     FROM role
+     INNER JOIN employee on employee.role_id = role.id
+     INNER JOIN department on role.department_id = department.id
+     ORDER by role.id;
+    `,
+        (err, result) => {
+          if (err) {
+            throw(err);
+          }
+        console.table(result);
+        }
+  );
+
   // ask user to choose an option from selection of menu items
   return inquirer
     .prompt([
@@ -40,21 +56,21 @@ function promptTracker() {
 function tableAction(option) {
     
       if (option === 'view all departments') {
-        db.query(`SELECT * FROM department`, (err, result) => {
+        db.query(`SELECT * FROM department;`, (err, result) => {
           if (err) {
             throw(err);
           }
           console.table(result);
         });
       } else if (option === 'view all roles') {
-        db.query(`SELECT * FROM role`, (err, result) => {
+        db.query(`SELECT * FROM role;`, (err, result) => {
           if (err) {
             throw(err);
           }
           console.table(result);
         });
       } else if (option === 'view all employees') {
-          db.query(`SELECT * FROM employee`, (err, result) => {
+          db.query(`SELECT * FROM employee;`, (err, result) => {
             if (err) {
               throw(err);
             }
@@ -72,7 +88,7 @@ function tableAction(option) {
             .then(answers => {
               db.query(
                 `INSERT INTO department (name)
-                 VALUES (${answers})`,
+                 VALUES (${answers});`,
                   (err, result) => {
                     if (err) {
                       throw(err);
@@ -103,7 +119,7 @@ function tableAction(option) {
               .then(answers => {
                 db.query(
                   `INSERT INTO role (title, salary, department_id)
-                   VALUES (${answers})`,
+                   VALUES (${answers});`,
                       (err, result) => {
                         if (err) {
                           throw(err);
@@ -140,7 +156,7 @@ function tableAction(option) {
               .then(answers => {
                 db.query(
                   `INSERT INTO employee (first_name, last_name, role_id, manager_id)
-                   VALUES (${answers})`,
+                   VALUES (${answers});`,
                     (err, result) => {
                       if (err) {
                         throw(err);
@@ -166,7 +182,7 @@ function tableAction(option) {
               . then(answers => {
                   db.query(
                     `UPDATE employee
-                     SET role_id = (${answers[1]}) WHERE id = (${answers[0]})`,
+                     SET role_id = (${answers[1]}) WHERE id = (${answers[0]});`,
                        (err, result) => {
                           if (err) {
                             throw(err);
@@ -192,7 +208,7 @@ function tableAction(option) {
               . then(answers => {
                   db.query(
                     `UPDATE employee
-                     SET manager_id = (${answers[1]}) WHERE id = (${answers[0]})`,
+                     SET manager_id = (${answers[1]}) WHERE id = (${answers[0]});`,
                        (err, result) => {
                           if (err) {
                             throw(err);
@@ -214,9 +230,8 @@ function tableAction(option) {
                 ])
                 . then(answers => {
                     db.query(
-                      `SELECT employee.*, role.name AS role_name
-                      FROM employee
-                      LEFT JOIN role ON employee.role.name_id = ${answers}_id`,
+                      `SELECT * from employee
+                      where employee.manager_id = ${answers};`,
                         (err, result) => {
                           if (err) {
                             throw(err);
@@ -224,7 +239,15 @@ function tableAction(option) {
                         console.table(result);
                       }
                     );
-                });
+                })
+        // alternatively, view all ee's by manager
+            //.then(answers => {
+              // db.query(
+              //   `SELECT * from employee
+              //    ORDER by employee.manager_id;`
+              // )
+              // })        
+
         } else if (option === 'view employees by department') {
             inquirer
               .prompt([
@@ -236,10 +259,10 @@ function tableAction(option) {
               ])
               . then(answers => {
                   db.query(
-                    `SELECT employee.*, role.department_id AS department_id
-                    FROM employee
-                    LEFT JOIN role.department ON employee.role._id = role.${answers}.id 
-                      ${answers}`,
+                    `SELECT employee.first_name, employee.last_name, department.name AS department_name
+                     FROM department
+                     INNER JOIN role ON role.department_id = department.id
+                     INNER JOIN employee ON employee.role_id = role.id where role.department_id = (${answers});`,
                         (err, result) => {
                           if (err) {
                             throw(err);
@@ -248,6 +271,17 @@ function tableAction(option) {
                         }
                   );
               });
+        // alternatively, view all ee's by department
+            //.then(answers => {
+              // db.query(
+              //   `SELECT employee.first_name, employee.last_name, department.name AS department_name
+              //    FROM department
+              //    INNER JOIN role on role.department_id = department.id
+              //    INNER JOIN employee on employee.role.id = role.id;
+              //    `,
+              // )
+              // }) 
+
         } else if (option === 'delete department') {
             inquirer
              .prompt([
