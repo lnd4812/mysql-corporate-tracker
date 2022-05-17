@@ -231,7 +231,7 @@ function tableAction(option) {
                 . then(answers => {
                     db.query(
                       `SELECT * from employee
-                      where employee.manager_id = ${answers};`,
+                      WHERE employee.manager_id = ${answers};`,
                         (err, result) => {
                           if (err) {
                             throw(err);
@@ -271,17 +271,6 @@ function tableAction(option) {
                         }
                   );
               });
-        // alternatively, view all ee's by department
-            //.then(answers => {
-              // db.query(
-              //   `SELECT employee.first_name, employee.last_name, department.name AS department_name
-              //    FROM department
-              //    INNER JOIN role on role.department_id = department.id
-              //    INNER JOIN employee on employee.role.id = role.id;
-              //    `,
-              // )
-              // }) 
-
         } else if (option === 'delete department') {
             inquirer
              .prompt([
